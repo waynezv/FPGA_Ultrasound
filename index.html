@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=640">
+
+    <link rel="stylesheet" href="stylesheets/core.css" media="screen">
+    <link rel="stylesheet" href="stylesheets/mobile.css" media="handheld, only screen and (max-device-width:640px)">
+    <link rel="stylesheet" href="stylesheets/github-light.css">
+
+    <script type="text/javascript" src="javascripts/modernizr.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script type="text/javascript" src="javascripts/headsmart.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function () {
+        $('#main_content').headsmart()
+      })
+    </script>
+    <title>18545-FPGA Ultrasound DAQ &amp; Beamforming System by waynezv</title>
+  </head>
+
+  <body>
+    <a id="forkme_banner" href="https://github.com/waynezv/18545-FPGA_Ultrasound-DAQ-Beamforming">View on GitHub</a>
+    <div class="shell">
+
+      <header>
+        <span class="ribbon-outer">
+          <span class="ribbon-inner">
+            <h1>18545-FPGA Ultrasound DAQ &amp; Beamforming System</h1>
+            <h2>Repo for CMU 18545 FPGA project -- Multi-channel ultrasound data acquisition and beamforming system.</h2>
+          </span>
+          <span class="left-tail"></span>
+          <span class="right-tail"></span>
+        </span>
+      </header>
+
+      <section id="downloads">
+        <span class="inner">
+          <a href="https://github.com/waynezv/18545-FPGA_Ultrasound-DAQ-Beamforming/zipball/master" class="zip"><em>download</em> .ZIP</a><a href="https://github.com/waynezv/18545-FPGA_Ultrasound-DAQ-Beamforming/tarball/master" class="tgz"><em>download</em> .TGZ</a>
+        </span>
+      </section>
+
+
+      <span class="banner-fix"></span>
+
+
+      <section id="main_content">
+        <h1>
+<a id="18545-fpga_ultrasound-daq-beamforming" class="anchor" href="#18545-fpga_ultrasound-daq-beamforming" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>18545-FPGA_Ultrasound-DAQ-Beamforming</h1>
+
+<p>Repo for CMU 18545 FPGA project -- Multi-channel ultrasound data acquisition and beamforming system.</p>
+
+<p>This repo documents the CMU course project -- 18545 Advanced Digital Design Project.</p>
+
+<blockquote>
+<ul>
+<li>Project Overview</li>
+<li>Pre-Preparation</li>
+<li>Usage Tutorial</li>
+<li>Design Components In-Depth Instructions</li>
+<li>Conclusion and Future Work</li>
+<li>Acknowledgement</li>
+<li>Bugs Report and Trouble Shooting</li>
+<li>Some Photos</li>
+</ul>
+</blockquote>
+
+<hr>
+
+<h2>
+<a id="1-project-overview" class="anchor" href="#1-project-overview" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>1. Project Overview</h2>
+
+<p>This project aims to detect the static and moving objects in the room and implement
+the imaging with the beamforming algorithm running on the AVNET ® ZedBoard.</p>
+
+<h3>
+<a id="motivation" class="anchor" href="#motivation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Motivation</h3>
+
+<p>Since this is a logic design and verification course, maybe the best practice is to
+perform all the functionalities on the FPGA fabric. But we decide to take the dual-core
+advantage of the ZedBoard, implementing the signal transmission and reception part on
+the fabric, and the signal process and analysis on the Linux host on the ARM core. This
+also gives us the benefit of easily customizing the user interface functionality with
+the user demands, and in the meanwhile keeping the high efficiency parallel computing
+with the FPGA.</p>
+
+<h3>
+<a id="framework" class="anchor" href="#framework" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Framework</h3>
+
+<p>The design consists of both hardware design and software design, <em>aka.</em>, the software-
+hardware co-design. The hardware design are the signal transmission and reception logic,
+including the signal generator, the DAC/ADC interface, the data processor, as well as the
+master controller. The software design are the signal process and analysis procedures,
+including the data acquisition controller, the digital signal processor, as well as the
+beamformer.</p>
+
+<h2>
+<a id="2-pre-preparation" class="anchor" href="#2-pre-preparation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>2. Pre-Preparation</h2>
+
+<p>Before working on this design, you need a few prerequisites to get started.</p>
+
+<h3>
+<a id="get-the-board-and-the-hardsoftmisc-essentials" class="anchor" href="#get-the-board-and-the-hardsoftmisc-essentials" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Get the board! ...and the hard/soft/misc essentials</h3>
+
+<p>What you need are</p>
+
+<ol>
+<li>A ZedBoard, with a Zynq-7000 FPGA fabric and a dual-core ARM processor. Although it
+is possible to use a different board, changes need to be made accordingly.</li>
+<li>Two PMOD DA4 and four PMOD AD2. Or other ADC/DAC parts you prefer.</li>
+<li>Two arrays of ultrasonic transcivers. I use two home-made linear arrays with 16 elments each,
+each element having the operating frequency at 40 KHz.</li>
+<li>An amplifier to amplify the output voltage. I use eight LM351 Op Amps to make a
+simple 16-channel non-inverting amplifier with 100 times gain.</li>
+<li>A monitor to display, a USB keyboard, a USB mouse, a USB hub.</li>
+<li>A breadboard and a lot of wires. I know how these stuff get things messy...</li>
+</ol>
+
+<h3>
+<a id="get-the-xillybus-ip-core-and-the-xillinux-ready" class="anchor" href="#get-the-xillybus-ip-core-and-the-xillinux-ready" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Get the Xillybus IP core and the Xillinux ready</h3>
+
+<p>In this part, you need to compile and implement the Xillybus IP core that will be running on the
+FPGA fabric (Programming Logic, PL), and install the Xillinux package on the ARM core (
+Processing System, PS).</p>
+
+<p>Please follow these steps</p>
+
+<ol>
+<li>Go to <a href="http://xillybus.com/xillinux" title="xillybus">this link</a> and download the necessary
+packages and tools.</li>
+<li>
+<p>Carefully follow <a href="http://xillybus.com/downloads/doc/xillybus_getting_started_zynq.pdf">this link</a>
+to setup the Xillinux and the Xillybus. It's lenthy, but pay attention to the <em>third</em>
+chapter to properly generate the bitstream file, configure the board and load up the
+booting image to the SD card. After this step, you should be able to boot up the
+Xillinux from the SD card.</p>
+
+<blockquote>
+<p><strong>Note:</strong> After this step, you are <strong>Unable</strong> to directly write the bitstream file to
+the PL via JTAG. Instead, copy and replace your custom bitstream file to the SD card
+with the same filename "xillydemo.bit".</p>
+</blockquote>
+</li>
+<li><p>Configure the compilation environment. Since Xillinux is essentially the Ubuntu kernel,
+you can configure the environment as you prefer. I always use the <a href="http://ohmyz.sh/"><em>oh-my-zsh</em></a> and the <a href="https://github.com/wklken/k-vim"><em>k-vim</em></a>.</p></li>
+</ol>
+
+<h2>
+<a id="3-usage-tutorial" class="anchor" href="#3-usage-tutorial" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>3. Usage Tutorial</h2>
+
+<p>Now you are ready to probe the system. In this step, you need to get yourself familiar
+with the FPGA logic programming and the host programming.</p>
+
+<p>Please refer to the following tutorials</p>
+
+<ol>
+<li><a href="http://xillybus.com/downloads/doc/xillybus_fpga_api.pdf">Xillybus FPGA designer's guide</a></li>
+<li><a href="http://xillybus.com/downloads/doc/xillybus_host_programming_guide_linux.pdf">Xillybus host application programming guide for Linux</a></li>
+<li><a href="http://xillybus.com/downloads/doc/xillybus_custom_ip.pdf">The guide to defining a custom Xillybus IP core</a></li>
+</ol>
+
+<blockquote>
+<p><strong>Note:</strong> You should be familiar with the SystemVerilog language as I use it, and knows
+the basics of Verilog and VHDL. Specifically, you should know</p>
+
+<ol>
+<li>Design hierarchy. The design under test (dut), the testbench, the top.</li>
+<li>Combinational logic and sequential logic. The "assigns" and "always_combs", the
+explicit and implicit finite state machines.</li>
+<li>The <strong>VERY</strong> important time synchronization. Good timing is the key to accurate and
+efficient logic.</li>
+<li>FSM-Datapath.</li>
+<li>Interface.</li>
+<li>and most importantly, Testbenches. Knowing how to write a good testbench for hardware
+threads, concurrent threads, use assertions are vital for a decent logic design.</li>
+</ol>
+</blockquote>
+
+<h3>
+<a id="connect-the-wires" class="anchor" href="#connect-the-wires" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Connect the wires</h3>
+
+<p>Connect the AD/DA modules, the transcivers, the amplifier, maybe an oscilliscope, and of
+course, the power.</p>
+
+<h3>
+<a id="implement-the-user-logic" class="anchor" href="#implement-the-user-logic" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Implement the user logic</h3>
+
+<p>The entire project can be found <a href="http://pan.baidu.com/s/1dFlrVhf">here</a>.</p>
+
+<p>Run the project under <em>verilog/vivado/xillydemo.xpr</em> to generate the bitstream file, and
+put it to the SD card.</p>
+
+<h3>
+<a id="run-the-demo-script" class="anchor" href="#run-the-demo-script" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Run the demo script</h3>
+
+<p>Boot up the Xillinux and run the Python script under <em>host_script/run545demo.py</em>.</p>
+
+<p>You should be able to receive the signals from the sensors and perform analysis.</p>
+
+<h2>
+<a id="4-design-components-in-depth-instructions" class="anchor" href="#4-design-components-in-depth-instructions" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>4. Design Components In-Depth Instructions</h2>
+
+<p>In this section, I will walk you through the details in each
+design module and the host script.</p>
+
+<blockquote>
+<p><strong>System</strong> <strong>flowchart:</strong> Signal generator --&gt; Pmod DA4 --&gt; Transmitter array</p>
+
+<p>Receiver array --&gt; Pmod AD2 --&gt; Data processor --&gt; Xilly reader --&gt; FIFO --&gt;
+Host process</p>
+</blockquote>
+
+<h3>
+<a id="signal-reception-interface" class="anchor" href="#signal-reception-interface" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Signal reception interface</h3>
+
+<p>The <em>ad_rcv_intfc</em> collects all the signals in the data transmission and reception flow,
+interfacing among the signal generator, the DA and AD, the data processor, the xilly
+reader, the fifo, the master controller to arduously control the logic.</p>
+
+<h3>
+<a id="signal-generator" class="anchor" href="#signal-generator" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Signal generator</h3>
+
+<p>The signal generator generates a 40 KHz continuous sine wave. Feel free to replace it
+with your custom signal source. Although there are many approaches to this purpose,
+<em>e.g.</em> PWM, DDS, CORDIC, to name a few, I use a 39-value look-up table with 12 bits
+resolution to approximate the sine wave. It turns to be a fairly good approximation.
+The reason to use 39 values is that after calculation I find this gives me an integer
+divisor of 2 to divide the 100 MHz on-board clock in order to generate the 40 KHz signal.</p>
+
+<p>On the arrival of the <em>sig_gen_en</em> signal from the top level, it addresses <em>start_gen</em>
+and shift from <em>idleSt</em> to <em>genSt</em>. It uses a counter to count the number of values it
+has sent out. It acknowledges the <em>sig_out_rdy</em> after sending done and waits for the
+<em>da_send_done</em> from the DA4 module before proceeding to the next generation. Default
+state is the <em>idleSt</em>. Reset brings it to the <em>idleSt</em>.</p>
+
+<h3>
+<a id="da-interface" class="anchor" href="#da-interface" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>DA interface</h3>
+
+<p>The pmodDA4 module interfaces with the Pmod DA4 hardware part to convert the signals from
+the signal generator to analog outputs. Please refer <a href="http://www.analog.com/media/en/technical-documentation/data-sheets/AD5628_5648_5668.pdf">this link</a> to see the protocals
+interfacing with the part.</p>
+
+<p>The module takes in a 12 bits signal each time, and sends out a 32 bits data sequence
+in serial in 32 clock cycles. The 32 bits sequence consists
+the command, the address, the signal, and the don't-care bits. The FSM has five states.
+At the power on the idle state transits to <em>stInternalRef</em> and then <em>stRefTx</em> to set the internal
+reference for the DA4 part, as required by the manual. It waits at the <em>stInit</em> until
+the arrival of the <em>sig_out_rdy</em> signal, and proceeds to the <em>stTx</em> to send out the data.
+It then addresses the <em>da_send_done</em> signal to interface with the signal generator to
+start next signal generation.</p>
+
+<h3>
+<a id="ad-interface" class="anchor" href="#ad-interface" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>AD interface</h3>
+
+<p>The slave pmodAD2_ctrl module and the master TWICtl module interface with the Pmod AD2 hardware part to
+convert the analog signals to digital signals.</p>
+
+<p>Please refer <a href="http://www.analog.com/media/en/technical-documentation/data-sheets/AD7991_7995_7999.pdf">this link</a> to see the protocals
+interfacing with the part. It's a little bit complex to handle...</p>
+
+<h3>
+<a id="data-processor" class="anchor" href="#data-processor" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Data processor</h3>
+
+<p>The ad_processor module loads 4 bytes of data from AD2 each time, and signals the xilly
+reader to pass the data to the 32*512 fifo.</p>
+
+<p>The initial purpose of this module is to perform basic windowing and filtering on the
+raw data, but, well, you know, time presses...</p>
+
+<h3>
+<a id="xilly-reader" class="anchor" href="#xilly-reader" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Xilly reader</h3>
+
+<p>This module controls the data follow to the fifo, see <a href="http://xillybus.com/downloads/doc/xillybus_fpga_api.pdf">Xillybus FPGA designer's guide</a>.</p>
+
+<h3>
+<a id="master-controller" class="anchor" href="#master-controller" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Master controller</h3>
+
+<p>As its name states, this is the top module connecting all the submodules and interfacing
+with the physical world. This module initializes the wires and registers and submodules.</p>
+
+<h3>
+<a id="other-modules" class="anchor" href="#other-modules" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Other modules</h3>
+
+<p>Clock divider, divide the clocks.</p>
+
+<p>Ad_2_fifo_sender, master control commands to start up the system.</p>
+
+<h3>
+<a id="host-script" class="anchor" href="#host-script" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Host script</h3>
+
+<p>This Python script first starts the data acquisition for a user defined period of time,
+and then decodes the channel and data information from the received data. Afterwards, it
+processes the data and analyzes the data with user defined algorithm.</p>
+
+<p>Three threads cooperate to do the task. Multithreading is useful here to leverage the
+bottleneck of data transmission throughput between the PL and the PS, and the speed limit
+of the PS. Pipelined scheme is preferred.</p>
+
+<h2>
+<a id="5-conclusion-and-future-work" class="anchor" href="#5-conclusion-and-future-work" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>5. Conclusion and Future Work</h2>
+
+<p>This concludes the entire design of the ultrasound DAQ and beamforming system.</p>
+
+<p>Future work</p>
+
+<ol>
+<li>Fix bugs.</li>
+<li>DSP on PL.</li>
+<li>Enrich the signal generator vault.</li>
+<li>Seperate control of signal transmission and reception.</li>
+<li>The doppler and beamforming algorithms.</li>
+</ol>
+
+<h2>
+<a id="6-acknowledgement" class="anchor" href="#6-acknowledgement" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>6. Acknowledgement</h2>
+
+<p>I would like to extend my great gratitude to all the people that support and help me
+with this project. Special thanks go to Prof. Bill Nace in CMU.</p>
+
+<h2>
+<a id="7-bugs-report-and-trouble-shooting" class="anchor" href="#7-bugs-report-and-trouble-shooting" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>7. Bugs Report and Trouble Shooting</h2>
+
+<ol>
+<li>Large detection range requires high power output.</li>
+<li>Signal distortion after amplifying.</li>
+<li>Pay attention to the input and output order of the FIFO.</li>
+<li>Pay attention to the default case and reset case. Make them safe.</li>
+<li>Pay attention to the holding signals and temporal signals.</li>
+<li>Pay attention to the cross time domain synchronization.</li>
+<li>Pay attention to the usage of x or z.</li>
+<li>Fake connect the GPIOs to FMC pins in the XDC file.</li>
+</ol>
+
+<h2>
+<a id="8-some-photos" class="anchor" href="#8-some-photos" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>8. Some photos</h2>
+
+<p><img src="./pics/0426_7.jpg" alt="ZedBoard"></p>
+
+<p><img src="./pics/0426_12.jpg" alt="Transcivers"></p>
+
+<p><img src="./pics/0426_10.jpg" alt="Amplifier"></p>
+
+<p><img src="./pics/0426_3.jpg" alt="Generated signal"></p>
+
+<p><img src="./pics/0426_1.jpg" alt="DA Timing"></p>
+
+<p><img src="./pics/0426_4.jpg" alt="Schematics"></p>
+
+<p><img src="./pics/0426_6.jpg" alt="Host process"></p>
+
+<p><img src="./pics/0426_8.jpg" alt="Process result"></p>
+
+<p><img src="./pics/0426_9.jpg" alt="Poster"></p>
+      </section>
+
+      <footer>
+        <span class="ribbon-outer">
+          <span class="ribbon-inner">
+            <p>this project by <a href="https://github.com/waynezv">waynezv</a> can be found on <a href="https://github.com/waynezv/18545-FPGA_Ultrasound-DAQ-Beamforming">GitHub</a></p>
+          </span>
+          <span class="left-tail"></span>
+          <span class="right-tail"></span>
+        </span>
+        <p>Generated with <a href="https://pages.github.com">GitHub Pages</a> using Merlot</p>
+        <span class="octocat"></span>
+      </footer>
+
+    </div>
+
+    
+  </body>
+</html>
