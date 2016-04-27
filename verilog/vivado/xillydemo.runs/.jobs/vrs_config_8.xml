@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<Runs Version="1" Minor="0">
+	<Run Id="vga_fifo_synth_1" LaunchDir="D:/Courex/FPGA/ProJ/xilinux/DAQ_sys_v_1/verilog/vivado/xillydemo.runs/vga_fifo_synth_1" FlowId="Vivado_Synthesis" FromStepId="vivado" ToStepId="vivado"/>
+	<Run Id="impl_1" LaunchDir="D:/Courex/FPGA/ProJ/xilinux/DAQ_sys_v_1/verilog/vivado/xillydemo.runs/impl_1" FlowId="Vivado_Implementation" FromStepId="init_design" ToStepId="route_design"/>
+</Runs>
+

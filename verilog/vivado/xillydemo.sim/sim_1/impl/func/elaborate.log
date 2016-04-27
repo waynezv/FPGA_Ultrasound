@@ -1,0 +1,7 @@
+Vivado Simulator 2015.1
+Copyright 1986-1999, 2001-2015 Xilinx, Inc. All Rights Reserved.
+Running: D:/Xilinx/Vivado/2015.1/bin/unwrapped/win64.o/xelab.exe -wto 1ff02c9557344e22bbf25fbd77c8be91 --debug typical --relax --mt 2 --include ../../../../../../vivado-essentials/vivado_system/ip/vivado_system_auto_pc_0/axi_infrastructure_v1_1/hdl/verilog --include ../../../../../../vivado-essentials/vivado_system/ip/vivado_system_processing_system7_0_0 --include ../../../../../../vivado-essentials/vivado_system/ip/vivado_system_processing_system7_0_0/hdl --include ../../../../../../vivado-essentials/vivado_system/ip/vivado_system_xbar_0/axi_infrastructure_v1_1/hdl/verilog -L xil_defaultlib -L unisims_ver -L secureip --snapshot data_acquis_dut_func_impl xil_defaultlib.data_acquis_dut xil_defaultlib.glbl -log elaborate.log 
+Using 2 slave threads.
+Starting static elaboration
+ERROR: [VRFC 10-1146] non-net variable cannot be connected to inout port SDATA [D:/Courex/FPGA/ProJ/xilinux/DAQ_sys_v_1/verilog/vivado/xillydemo.srcs/sim_1/new/data_acquis_dut.sv:29]
+ERROR: [XSIM 43-3322] Static elaboration of top level Verilog design unit(s) in library work failed.

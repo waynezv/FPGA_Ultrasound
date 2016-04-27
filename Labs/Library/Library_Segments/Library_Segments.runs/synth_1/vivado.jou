@@ -1,0 +1,10 @@
+#-----------------------------------------------------------
+# Vivado v2015.1 (64-bit)
+# SW Build 1215546 on Mon Apr 27 19:22:08 MDT 2015
+# IP Build 1209967 on Tue Apr 21 11:39:20 MDT 2015
+# Start of session at: Fri Mar 04 17:01:51 2016
+# Process ID: 16824
+# Log file: D:/Courex/FPGA/Labs/Library/Library_Segments/Library_Segments.runs/synth_1/Mux4to1.vds
+# Journal file: D:/Courex/FPGA/Labs/Library/Library_Segments/Library_Segments.runs/synth_1\vivado.jou
+#-----------------------------------------------------------
+source Mux4to1.tcl -notrace

@@ -1,0 +1,9 @@
+Vivado Simulator 2015.1
+Copyright 1986-1999, 2001-2015 Xilinx, Inc. All Rights Reserved.
+Running: D:/Xilinx/Vivado/2015.1/bin/unwrapped/win64.o/xelab.exe -wto 1ff02c9557344e22bbf25fbd77c8be91 --debug typical --relax --mt 2 --include ../../../../../vivado-essentials/vivado_system/ip/vivado_system_auto_pc_0/axi_infrastructure_v1_1/hdl/verilog --include ../../../../../vivado-essentials/vivado_system/ip/vivado_system_processing_system7_0_0 --include ../../../../../vivado-essentials/vivado_system/ip/vivado_system_processing_system7_0_0/hdl --include ../../../../../vivado-essentials/vivado_system/ip/vivado_system_xbar_0/axi_infrastructure_v1_1/hdl/verilog -L fifo_generator_v12_0 -L xil_defaultlib -L lib_cdc_v1_0 -L proc_sys_reset_v5_0 -L generic_baseblocks_v2_1 -L axi_infrastructure_v1_1 -L axi_register_slice_v2_1 -L axi_data_fifo_v2_1 -L axi_crossbar_v2_1 -L axi_protocol_converter_v2_1 -L unisims_ver -L unimacro_ver -L secureip --snapshot data_acquis_controller_behav xil_defaultlib.data_acquis_controller xil_defaultlib.glbl -log elaborate.log 
+Using 2 slave threads.
+Starting static elaboration
+ERROR: [VRFC 10-2063] Module <vivado_system_xillybus_lite_0_0> not found while processing module instance <xillybus_lite_0> [D:/Courex/FPGA/ProJ/xilinux/DAQ_sys_v_1/vivado-essentials/vivado_system/hdl/vivado_system.v:1581]
+WARNING: [VRFC 10-278] actual bit length 1 differs from formal bit length 16 for port ad_data_in [D:/Courex/FPGA/ProJ/xilinux/DAQ_sys_v_1/verilog/vivado/xillydemo.srcs/sources_1/imports/sources_1/new/data_acquis_controller.sv:282]
+WARNING: [VRFC 10-278] actual bit length 1 differs from formal bit length 36 for port din [D:/Courex/FPGA/ProJ/xilinux/DAQ_sys_v_1/verilog/vivado/xillydemo.srcs/sources_1/imports/sources_1/new/data_acquis_controller.sv:426]
+ERROR: [XSIM 43-3322] Static elaboration of top level Verilog design unit(s) in library work failed.

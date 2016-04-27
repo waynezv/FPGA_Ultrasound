@@ -1,0 +1,134 @@
+NET "clk_100" TNM_NET = "TN_gclk";
+TIMESPEC "TS_gclk" = PERIOD "TN_gclk" 10 ns HIGH 50 %;
+
+# The VGA outputs are turned into an analog voltage by virtue of a resistor
+# network, so the flip flops driving these must sit in the IOBs to minimize
+# timing skew. The RTL code should handle this, but the constraint below
+# is there to fail if something goes wrong about this.
+
+INST "xillybus_ins/vga_iob_ff[*]" TNM = "tgrp_vga_pads_ffs";
+TIMESPEC "TS_force_iob_ffs" = FROM "tgrp_vga_pads_ffs" 5.5 ns ;
+
+NET "clk_100"              LOC = Y9   | IOSTANDARD=LVCMOS33;  # "GCLK"
+NET  "GPIO_LED[0]"          LOC = T22  | IOSTANDARD=LVCMOS33;  # "LD0"
+NET  "GPIO_LED[1]"          LOC = T21  | IOSTANDARD=LVCMOS33;  # "LD1"
+NET  "GPIO_LED[2]"          LOC = U22  | IOSTANDARD=LVCMOS33;  # "LD2"
+NET  "GPIO_LED[3]"          LOC = U21  | IOSTANDARD=LVCMOS33;  # "LD3"
+NET  "vga4_blue[0]"         LOC = Y21  | IOSTANDARD=LVCMOS33;  # "VGA-B1"
+NET  "vga4_blue[1]"         LOC = Y20  | IOSTANDARD=LVCMOS33;  # "VGA-B2"
+NET  "vga4_blue[2]"         LOC = AB20 | IOSTANDARD=LVCMOS33;  # "VGA-B3"
+NET  "vga4_blue[3]"         LOC = AB19 | IOSTANDARD=LVCMOS33;  # "VGA-B4"
+NET  "vga4_green[0]"        LOC = AB22 | IOSTANDARD=LVCMOS33;  # "VGA-G1"
+NET  "vga4_green[1]"        LOC = AA22 | IOSTANDARD=LVCMOS33;  # "VGA-G2"
+NET  "vga4_green[2]"        LOC = AB21 | IOSTANDARD=LVCMOS33;  # "VGA-G3"
+NET  "vga4_green[3]"        LOC = AA21 | IOSTANDARD=LVCMOS33;  # "VGA-G4"
+NET  "vga4_red[0]"          LOC = V20  | IOSTANDARD=LVCMOS33;  # "VGA-R1"
+NET  "vga4_red[1]"          LOC = U20  | IOSTANDARD=LVCMOS33;  # "VGA-R2"
+NET  "vga4_red[2]"          LOC = V19  | IOSTANDARD=LVCMOS33;  # "VGA-R3"
+NET  "vga4_red[3]"          LOC = V18  | IOSTANDARD=LVCMOS33;  # "VGA-R4"
+NET  "vga_vsync"            LOC = Y19  | IOSTANDARD=LVCMOS33;  # "VGA-VS"
+NET  "vga_hsync"            LOC = AA19 | IOSTANDARD=LVCMOS33;  # "VGA-HS"
+
+# IMPORTANT: Since four LEDs are taken by the Xillybus IP core, the pin
+# placement doesn't match the one given by Digilent.
+
+# GPIO pin to reset the USB OTG PHY
+
+NET  PS_GPIO[0] LOC = G17  | IOSTANDARD = LVCMOS33;	# USB-Reset
+
+# On-board OLED
+
+NET  PS_GPIO[1] LOC = U11  | IOSTANDARD = LVCMOS33;	# OLED-VBAT
+NET  PS_GPIO[2] LOC = U12  | IOSTANDARD = LVCMOS33;	# OLED-VDD
+NET  PS_GPIO[3] LOC = U9   | IOSTANDARD = LVCMOS33;	# OLED-RES
+NET  PS_GPIO[4] LOC = U10  | IOSTANDARD = LVCMOS33;	# OLED-DC
+NET  PS_GPIO[5] LOC = AB12 | IOSTANDARD = LVCMOS33;	# OLED-SCLK
+NET  PS_GPIO[6] LOC = AA12 | IOSTANDARD = LVCMOS33;	# OLED-SDIN
+
+# On-board LEDs. Note that only for LEDs are allocated, as opposed to
+# Digilent's eight, and all placements that follow are shifted by four.
+# There was no other choice, as the tools don't allow unplaced PS GPIO pins.
+
+NET  PS_GPIO[7] LOC = V22 | IOSTANDARD = LVCMOS33;	# LD4
+NET  PS_GPIO[8] LOC = W22 | IOSTANDARD = LVCMOS33;	# LD5
+NET  PS_GPIO[9] LOC = U19 | IOSTANDARD = LVCMOS33;	# LD6
+NET  PS_GPIO[10] LOC = U14 | IOSTANDARD = LVCMOS33;	# LD7
+
+# On-board Slide Switches
+
+NET  PS_GPIO[11] LOC = F22 | IOSTANDARD = LVCMOS33;	# SW0
+NET  PS_GPIO[12] LOC = G22 | IOSTANDARD = LVCMOS33;	# SW1
+NET  PS_GPIO[13] LOC = H22 | IOSTANDARD = LVCMOS33;	# SW2
+NET  PS_GPIO[14] LOC = F21 | IOSTANDARD = LVCMOS33;	# SW3
+NET  PS_GPIO[15] LOC = H19 | IOSTANDARD = LVCMOS33;	# SW4
+NET  PS_GPIO[16] LOC = H18 | IOSTANDARD = LVCMOS33;	# SW5
+NET  PS_GPIO[17] LOC = H17 | IOSTANDARD = LVCMOS33;	# SW6
+NET  PS_GPIO[18] LOC = M15 | IOSTANDARD = LVCMOS33;	# SW7
+
+# On-board Left, Right, Up, Down, and Select Pushbuttons
+
+NET  PS_GPIO[19] LOC = N15 | IOSTANDARD = LVCMOS33;	# BTNL
+NET  PS_GPIO[20] LOC = R18 | IOSTANDARD = LVCMOS33;	# BTNR
+NET  PS_GPIO[21] LOC = T18 | IOSTANDARD = LVCMOS33;	# BTNU
+NET  PS_GPIO[22] LOC = R16 | IOSTANDARD = LVCMOS33;	# BTND
+NET  PS_GPIO[23] LOC = P16 | IOSTANDARD = LVCMOS33;	# BTNS
+
+# Pmod JA
+
+NET  PS_GPIO[24] LOC = Y11  | IOSTANDARD = LVCMOS33;	# JA1
+NET  PS_GPIO[25] LOC = AA11 | IOSTANDARD = LVCMOS33;	# JA2
+NET  PS_GPIO[26] LOC = Y10  | IOSTANDARD = LVCMOS33;	# JA3
+NET  PS_GPIO[27] LOC = AA9  | IOSTANDARD = LVCMOS33;	# JA4
+NET  PS_GPIO[28] LOC = AB11 | IOSTANDARD = LVCMOS33;	# JA7
+NET  PS_GPIO[29] LOC = AB10 | IOSTANDARD = LVCMOS33;	# JA8
+NET  PS_GPIO[30] LOC = AB9  | IOSTANDARD = LVCMOS33;	# JA9
+NET  PS_GPIO[31] LOC = AA8  | IOSTANDARD = LVCMOS33;	# JA10
+
+# Pmod JB
+
+NET  PS_GPIO[32] LOC = W12 | IOSTANDARD = LVCMOS33;	# JB1
+NET  PS_GPIO[33] LOC = W11 | IOSTANDARD = LVCMOS33;	# JB2
+NET  PS_GPIO[34] LOC = V10 | IOSTANDARD = LVCMOS33;	# JB3
+NET  PS_GPIO[35] LOC = W8  | IOSTANDARD = LVCMOS33;	# JB4
+NET  PS_GPIO[36] LOC = V12 | IOSTANDARD = LVCMOS33;	# JB7
+NET  PS_GPIO[37] LOC = W10 | IOSTANDARD = LVCMOS33;	# JB8
+NET  PS_GPIO[38] LOC = V9  | IOSTANDARD = LVCMOS33;	# JB9
+NET  PS_GPIO[39] LOC = V8  | IOSTANDARD = LVCMOS33;	# JB10
+
+# Pmod JC
+
+NET  PS_GPIO[40] LOC = AB7 | IOSTANDARD = LVCMOS33;	# JC1_P	(JC1)
+NET  PS_GPIO[41] LOC = AB6 | IOSTANDARD = LVCMOS33;	# JC1_N	(JC2)
+NET  PS_GPIO[42] LOC = Y4  | IOSTANDARD = LVCMOS33;	# JC2_P	(JC3)
+NET  PS_GPIO[43] LOC = AA4 | IOSTANDARD = LVCMOS33;	# JC2_N	(JC4)
+NET  PS_GPIO[44] LOC = R6  | IOSTANDARD = LVCMOS33;	# JC3_P	(JC7)
+NET  PS_GPIO[45] LOC = T6  | IOSTANDARD = LVCMOS33;	# JC3_N	(JC8)
+NET  PS_GPIO[46] LOC = T4  | IOSTANDARD = LVCMOS33;	# JC4_P	(JC9)
+NET  PS_GPIO[47] LOC = U4  | IOSTANDARD = LVCMOS33;	# JC4_N	(JC10)
+
+# Pmod JD
+
+NET  PS_GPIO[48] LOC = V7  | IOSTANDARD = LVCMOS33;	# JD1_P	(JD1)
+NET  PS_GPIO[49] LOC = W7  | IOSTANDARD = LVCMOS33;	# JD1_N	(JD2)
+NET  PS_GPIO[50] LOC = V5  | IOSTANDARD = LVCMOS33;	# JD2_P	(JD3)
+NET  PS_GPIO[51] LOC = V4  | IOSTANDARD = LVCMOS33;	# JD2_N	(JD4)
+NET  PS_GPIO[52] LOC = W6  | IOSTANDARD = LVCMOS33;	# JD3_P	(JD7)
+NET  PS_GPIO[53] LOC = W5  | IOSTANDARD = LVCMOS33;	# JD3_N	(JD8)
+NET  PS_GPIO[54] LOC = U6  | IOSTANDARD = LVCMOS33;	# JD4_P	(JD9)
+NET  PS_GPIO[55] LOC = U5  | IOSTANDARD = LVCMOS33;	# JD4_N	(JD10)
+
+# Pin for detecting USB OTG over-current condition
+
+NET  otg_oc          LOC = L16  | IOSTANDARD="LVCMOS33";
+
+# Pins connected to sound chip
+NET smbus_addr[0]  LOC = AB1  | IOSTANDARD=LVCMOS33;  # "AC-ADR0"
+NET smbus_addr[1]  LOC = Y5   | IOSTANDARD=LVCMOS33;  # "AC-ADR1"
+NET smb_sclk       LOC = AB4  | IOSTANDARD=LVCMOS33;  # "AC-SCK"
+NET smb_sdata      LOC = AB5  | IOSTANDARD=LVCMOS33;  # "AC-SDA"
+
+NET audio_dac      LOC = Y8   | IOSTANDARD=LVCMOS33;  # "AC-GPIO0"
+NET audio_adc      LOC = AA7  | IOSTANDARD=LVCMOS33;  # "AC-GPIO1"
+NET audio_bclk     LOC = AA6  | IOSTANDARD=LVCMOS33;  # "AC-GPIO2"
+NET audio_lrclk    LOC = Y6   | IOSTANDARD=LVCMOS33;  # "AC-GPIO3"
+NET audio_mclk     LOC = AB2  | IOSTANDARD=LVCMOS33;  # "AC-MCLK"

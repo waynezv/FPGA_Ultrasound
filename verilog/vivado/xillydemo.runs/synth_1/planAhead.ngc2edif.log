@@ -1,0 +1,130 @@
+Release 14.7 - ngc2edif P_INT.20150421 (nt64)
+Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
+Reading design xillybus_core.ngc ...
+WARNING:NetListWriters:298 - No output is written to xillybus_core.xncf,
+   ignored.
+Processing design ...
+   Preping design's networks ...
+   Preping design's macros ...
+WARNING:NetListWriters:306 - Signal bus messages_ins/msg_buf_real_word[26 : 0]
+   on block xillybus_core is not reconstructed, because there are some missing
+   bus signals.
+WARNING:NetListWriters:306 - Signal bus bar_registers_ins/buf_ctrl_reg[26 : 0]
+   on block xillybus_core is not reconstructed, because there are some missing
+   bus signals.
+WARNING:NetListWriters:306 - Signal bus
+   axi4_send_dma_ins/GND_9_o_GND_9_o_sub_181_OUT[8 : 3] on block xillybus_core
+   is not reconstructed, because there are some missing bus signals.
+WARNING:NetListWriters:306 - Signal bus
+   rd_arbiter_ins/Mmux_rd_arb_roundrobin[2]_recvbuf_bufno[8]_wide_mux_44_OUT_rs_
+   lut[8 : 3] on block xillybus_core is not reconstructed, because there are
+   some missing bus signals.
+WARNING:NetListWriters:306 - Signal bus messages_ins/Madd_n0532_Madd_cy[2 : 0]
+   on block xillybus_core is not reconstructed, because there are some missing
+   bus signals.
+WARNING:NetListWriters:306 - Signal bus
+   messages_ins/Mmux_msg_vacant_entries[3]_BUS_0004_mux_43_OUT_rs_A[3 : 0] on
+   block xillybus_core is not reconstructed, because there are some missing bus
+   signals.
+WARNING:NetListWriters:306 - Signal bus
+   messages_ins/msgbuf_read_data[31]_msgbuf_read_data[31]_mux_24_OUT[31 : 22] on
+   block xillybus_core is not reconstructed, because there are some missing bus
+   signals.
+WARNING:NetListWriters:306 - Signal bus
+   messages_ins/msg_buf_w1[31]_msg_buf_w0[31]_mux_50_OUT[26 : 0] on block
+   xillybus_core is not reconstructed, because there are some missing bus
+   signals.
+WARNING:NetListWriters:306 - Signal bus
+   messages_ins/GND_5_o_GND_5_o_mux_88_OUT[26 : 0] on block xillybus_core is not
+   reconstructed, because there are some missing bus signals.
+WARNING:NetListWriters:306 - Signal bus messages_ins/msg_buf_w0[26 : 0] on block
+   xillybus_core is not reconstructed, because there are some missing bus
+   signals.
+  finished :Prep
+Writing EDIF netlist file xillybus_core.edif ...
+ngc2edif: Total memory usage is 101612 kilobytes
+
+Release 14.7 - ngc2edif P_INT.20150421 (nt64)
+Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
+Reading design xillybus_lite.ngc ...
+WARNING:NetListWriters:298 - No output is written to xillybus_lite.xncf,
+   ignored.
+Processing design ...
+   Preping design's networks ...
+   Preping design's macros ...
+  finished :Prep
+Writing EDIF netlist file xillybus_lite.edif ...
+ngc2edif: Total memory usage is 88236 kilobytes
+
+Release 14.7 - ngc2edif P_INT.20150421 (nt64)
+Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
+Reading design xillyvga_core.ngc ...
+WARNING:NetListWriters:298 - No output is written to xillyvga_core.xncf,
+   ignored.
+Processing design ...
+   Preping design's networks ...
+   Preping design's macros ...
+WARNING:NetListWriters:306 - Signal bus fifo_rd_data_w[32 : 0] on block
+   xillyvga_core is not reconstructed, because there are some missing bus
+   signals.
+WARNING:NetListWriters:306 - Signal bus screensaver_ins/vorigin[8 : 0] on block
+   xillyvga_core is not reconstructed, because there are some missing bus
+   signals.
+WARNING:NetListWriters:306 - Signal bus Result[9 : 0] on block xillyvga_core is
+   not reconstructed, because there are some missing bus signals.
+WARNING:NetListWriters:306 - Signal bus
+   registers_ins/v_data_start_reg[31]_GND_32_o_mux_33_OUT[2 : 0] on block
+   xillyvga_core is not reconstructed, because there are some missing bus
+   signals.
+  finished :Prep
+Writing EDIF netlist file xillyvga_core.edif ...
+ngc2edif: Total memory usage is 90284 kilobytes
+
+Release 14.7 - ngc2edif P_INT.20150421 (nt64)
+Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
+Reading design xillybus_lite.ngc ...
+WARNING:NetListWriters:298 - No output is written to xillybus_lite.xncf,
+   ignored.
+Processing design ...
+   Preping design's networks ...
+   Preping design's macros ...
+  finished :Prep
+Writing EDIF netlist file xillybus_lite.edif ...
+ngc2edif: Total memory usage is 88236 kilobytes
+
+Release 14.7 - ngc2edif P_INT.20150421 (nt64)
+Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
+Reading design xillybus_lite.ngc ...
+WARNING:NetListWriters:298 - No output is written to xillybus_lite.xncf,
+   ignored.
+Processing design ...
+   Preping design's networks ...
+   Preping design's macros ...
+  finished :Prep
+Writing EDIF netlist file xillybus_lite.edif ...
+ngc2edif: Total memory usage is 84840 kilobytes
+
+Release 14.7 - ngc2edif P_INT.20150421 (nt64)
+Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
+Reading design xillybus_lite.ngc ...
+WARNING:NetListWriters:298 - No output is written to xillybus_lite.xncf,
+   ignored.
+Processing design ...
+   Preping design's networks ...
+   Preping design's macros ...
+  finished :Prep
+Writing EDIF netlist file xillybus_lite.edif ...
+ngc2edif: Total memory usage is 88088 kilobytes
+
+Release 14.7 - ngc2edif P_INT.20150421 (nt64)
+Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
+Reading design xillybus_lite.ngc ...
+WARNING:NetListWriters:298 - No output is written to xillybus_lite.xncf,
+   ignored.
+Processing design ...
+   Preping design's networks ...
+   Preping design's macros ...
+  finished :Prep
+Writing EDIF netlist file xillybus_lite.edif ...
+ngc2edif: Total memory usage is 88024 kilobytes
+

@@ -101,6 +101,8 @@ Connect the AD/DA modules, the transcivers, the amplifier, maybe an oscilliscope
 course, the power.
 
 ### Implement the user logic
+The entire project can be found [here](http://pan.baidu.com/s/1dFlrVhf).
+
 Run the project under *verilog/vivado/xillydemo.xpr* to generate the bitstream file, and
 put it to the SD card.
 

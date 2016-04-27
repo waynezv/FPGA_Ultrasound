@@ -1,0 +1,9 @@
+# compile verilog/system verilog design source files
+verilog xil_defaultlib  "data_acquis_dut_func_impl.v" --include "../../../../../../vivado-essentials/vivado_system/ip/vivado_system_auto_pc_0/axi_infrastructure_v1_1/hdl/verilog" --include "../../../../../../vivado-essentials/vivado_system/ip/vivado_system_processing_system7_0_0" --include "../../../../../../vivado-essentials/vivado_system/ip/vivado_system_processing_system7_0_0/hdl" --include "../../../../../../vivado-essentials/vivado_system/ip/vivado_system_xbar_0/axi_infrastructure_v1_1/hdl/verilog"
+sv xil_defaultlib  "../../../../xillydemo.srcs/sim_1/new/data_acquis_dut.sv" --include "../../../../../../vivado-essentials/vivado_system/ip/vivado_system_auto_pc_0/axi_infrastructure_v1_1/hdl/verilog" --include "../../../../../../vivado-essentials/vivado_system/ip/vivado_system_processing_system7_0_0" --include "../../../../../../vivado-essentials/vivado_system/ip/vivado_system_processing_system7_0_0/hdl" --include "../../../../../../vivado-essentials/vivado_system/ip/vivado_system_xbar_0/axi_infrastructure_v1_1/hdl/verilog"
+
+# compile glbl module
+verilog xil_defaultlib "glbl.v"
+
+# Do not sort compile order
+nosort

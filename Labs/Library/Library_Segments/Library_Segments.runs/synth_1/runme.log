@@ -1,0 +1,36 @@
+
+*** Running vivado
+    with args -log Mux4to1.vds -m64 -mode batch -messageDb vivado.pb -notrace -source Mux4to1.tcl
+
+WARNING: Default location for XILINX_VIVADO_HLS not found: 
+
+****** Vivado v2015.1 (64-bit)
+  **** SW Build 1215546 on Mon Apr 27 19:22:08 MDT 2015
+  **** IP Build 1209967 on Tue Apr 21 11:39:20 MDT 2015
+    ** Copyright 1986-2015 Xilinx, Inc. All Rights Reserved.
+
+source Mux4to1.tcl -notrace
+Command: synth_design -top Mux4to1 -part xc7z020clg484-1
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7z020'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7z020'
+ERROR: [Synth 8-1031] load is not declared [D:/Courex/FPGA/Labs/Library/Library_Segments/Library_Segments.srcs/sources_1/imports/Library/Library.sv:226]
+INFO: [Synth 8-2350] module Counter ignored due to previous errors [D:/Courex/FPGA/Labs/Library/Library_Segments/Library_Segments.srcs/sources_1/imports/Library/Library.sv:215]
+ERROR: [Synth 8-1031] load is not declared [D:/Courex/FPGA/Labs/Library/Library_Segments/Library_Segments.srcs/sources_1/imports/Library/Library.sv:250]
+ERROR: [Synth 8-1031] load is not declared [D:/Courex/FPGA/Labs/Library/Library_Segments/Library_Segments.srcs/sources_1/imports/Library/Library.sv:252]
+INFO: [Synth 8-2350] module Counter_test ignored due to previous errors [D:/Courex/FPGA/Labs/Library/Library_Segments/Library_Segments.srcs/sources_1/imports/Library/Library.sv:233]
+INFO: [Synth 8-2350] module ShiftRegister ignored due to previous errors [D:/Courex/FPGA/Labs/Library/Library_Segments/Library_Segments.srcs/sources_1/imports/Library/Library.sv:266]
+INFO: [Synth 8-2350] module ShiftRegister_test ignored due to previous errors [D:/Courex/FPGA/Labs/Library/Library_Segments/Library_Segments.srcs/sources_1/imports/Library/Library.sv:277]
+INFO: [Synth 8-2350] module DFF ignored due to previous errors [D:/Courex/FPGA/Labs/Library/Library_Segments/Library_Segments.srcs/sources_1/imports/Library/Library.sv:305]
+ERROR: [Synth 8-2715] syntax error near '0 [D:/Courex/FPGA/Labs/Library/Library_Segments/Library_Segments.srcs/sources_1/imports/Library/Library.sv:343]
+ERROR: [Synth 8-2715] syntax error near <= [D:/Courex/FPGA/Labs/Library/Library_Segments/Library_Segments.srcs/sources_1/imports/Library/Library.sv:345]
+ERROR: [Synth 8-2715] syntax error near <= [D:/Courex/FPGA/Labs/Library/Library_Segments/Library_Segments.srcs/sources_1/imports/Library/Library.sv:347]
+ERROR: [Synth 8-1002] ffs_not_equal is not a constant [D:/Courex/FPGA/Labs/Library/Library_Segments/Library_Segments.srcs/sources_1/imports/Library/Library.sv:344]
+ERROR: [Synth 8-1002] clk_val is not a constant [D:/Courex/FPGA/Labs/Library/Library_Segments/Library_Segments.srcs/sources_1/imports/Library/Library.sv:346]
+INFO: [Synth 8-2350] module Debouncer ignored due to previous errors [D:/Courex/FPGA/Labs/Library/Library_Segments/Library_Segments.srcs/sources_1/imports/Library/Library.sv:317]
+Failed to read verilog 'D:/Courex/FPGA/Labs/Library/Library_Segments/Library_Segments.srcs/sources_1/imports/Library/Library.sv'
+INFO: [Common 17-83] Releasing license: Synthesis
+8 Infos, 0 Warnings, 0 Critical Warnings and 9 Errors encountered.
+synth_design failed
+ERROR: [Common 17-69] Command failed: Synthesis failed - please see the console or run log file for details
+INFO: [Common 17-206] Exiting Vivado at Fri Mar 04 17:02:01 2016...

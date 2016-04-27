@@ -1,0 +1,14 @@
+# compile vhdl design source files
+vhdl fifo_generator_v12_0  "../../../../../vivado-essentials/fifo_8x2048/fifo_generator_v12_0/hdl/fifo_generator_v12_0_rfs.vhd"
+vhdl fifo_generator_v12_0  "../../../../../vivado-essentials/fifo_32x512/fifo_generator_v12_0/hdl/fifo_generator_v12_0_rfs.vhd"
+vhdl fifo_generator_v12_0  "../../../../../vivado-essentials/vga_fifo/fifo_generator_v12_0/hdl/fifo_generator_v12_0_rfs.vhd"
+vhdl lib_cdc_v1_0  "../../../../../vivado-essentials/vivado_system/ip/vivado_system_rst_processing_system7_0_100M_0/lib_cdc_v1_0/hdl/src/vhdl/cdc_sync.vhd"
+vhdl proc_sys_reset_v5_0  "../../../../../vivado-essentials/vivado_system/ip/vivado_system_rst_processing_system7_0_100M_0/proc_sys_reset_v5_0/hdl/src/vhdl/upcnt_n.vhd"
+vhdl proc_sys_reset_v5_0  "../../../../../vivado-essentials/vivado_system/ip/vivado_system_rst_processing_system7_0_100M_0/proc_sys_reset_v5_0/hdl/src/vhdl/sequence.vhd"
+vhdl proc_sys_reset_v5_0  "../../../../../vivado-essentials/vivado_system/ip/vivado_system_rst_processing_system7_0_100M_0/proc_sys_reset_v5_0/hdl/src/vhdl/lpf.vhd"
+vhdl proc_sys_reset_v5_0  "../../../../../vivado-essentials/vivado_system/ip/vivado_system_rst_processing_system7_0_100M_0/proc_sys_reset_v5_0/hdl/src/vhdl/proc_sys_reset.vhd"
+vhdl xil_defaultlib  "../../../../../vivado-essentials/vivado_system/ip/vivado_system_rst_processing_system7_0_100M_0/sim/vivado_system_rst_processing_system7_0_100M_0.vhd"
+vhdl fifo_generator_v12_0  "../../../../../vivado-essentials/vivado_system/ip/vivado_system_xbar_0/fifo_generator_v12_0/hdl/fifo_generator_v12_0_rfs.vhd"
+
+# Do not sort compile order
+nosort

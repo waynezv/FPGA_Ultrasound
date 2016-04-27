@@ -1,0 +1,10 @@
+#-----------------------------------------------------------
+# Vivado v2015.1 (64-bit)
+# SW Build 1215546 on Mon Apr 27 19:22:08 MDT 2015
+# IP Build 1209967 on Tue Apr 21 11:39:20 MDT 2015
+# Start of session at: Wed Apr 13 03:26:31 2016
+# Process ID: 11144
+# Log file: D:/Courex/FPGA/ProJ/xilinux/DAQ_sys_v_1/verilog/vivado/xillydemo.runs/fifo_8x2048_synth_1/fifo_8x2048.vds
+# Journal file: D:/Courex/FPGA/ProJ/xilinux/DAQ_sys_v_1/verilog/vivado/xillydemo.runs/fifo_8x2048_synth_1\vivado.jou
+#-----------------------------------------------------------
+source fifo_8x2048.tcl -notrace
